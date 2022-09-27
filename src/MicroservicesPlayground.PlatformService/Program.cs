@@ -1,4 +1,5 @@
 using MicroservicesPlayground.PlatformService.Data;
+using MicroservicesPlayground.PlatformService.SyncDataService.Http;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -11,6 +12,7 @@ builder.Services.AddDbContext<PlatformDbContext>(opt =>
     opt.UseInMemoryDatabase("PlatformDb"));
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 builder.Services.AddScoped<IPlatformRepository, PlatformRepository>();
+builder.Services.AddHttpClient<ICommandDataClient, HttpCommandDataClient>();
 
 var app = builder.Build();
 
